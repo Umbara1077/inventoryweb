@@ -1,8 +1,8 @@
+require('dotenv').config();
 const express = require('express');
 const sgMail = require('@sendgrid/mail');
-sgMail.setApiKey('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');
 
-
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 const app = express();
 app.use(express.json());
@@ -39,7 +39,7 @@ app.post('/send-email', async (req, res) => {
   }
 });
 
-//const PORT = process.env.PORT || 3000;
-//app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
-exports.api = functions.https.onRequest(app);
+//exports.api = functions.https.onRequest(app);
